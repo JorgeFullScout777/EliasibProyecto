@@ -35,7 +35,7 @@
                     <ul class="nav nav-treeview">
                         <!-- Actors -->
                         <li class="nav-item">
-                            <a href="{{ route('Actors') }}" class="nav-link">
+                            <a href="{{ route('Actors.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Actors</p>
                             </a>
@@ -43,7 +43,7 @@
 
                         <!-- Address -->
                         <li class="nav-item">
-                            <a href="{{ route('Address') }}" class="nav-link">
+                            <a href="{{ route('Address.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Address</p>
                             </a>
@@ -51,7 +51,7 @@
 
                         <!-- Categories -->
                         <li class="nav-item">
-                            <a href="{{ route('Categories') }}" class="nav-link">
+                            <a href="{{ route('Categories.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Categories</p>
                             </a>
@@ -59,7 +59,7 @@
 
                         <!-- Citys -->
                         <li class="nav-item">
-                            <a href="{{ route('Citys') }}" class="nav-link">
+                            <a href="{{ route('Citys.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Citys</p>
                             </a>
@@ -67,7 +67,7 @@
 
                         <!-- Customers -->
                         <li class="nav-item">
-                            <a href="{{ route('Customers') }}" class="nav-link">
+                            <a href="{{ route('Customers.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Customers</p>
                             </a>
@@ -75,7 +75,7 @@
 
                         <!-- Films -->
                         <li class="nav-item">
-                            <a href="{{ route('Films') }}" class="nav-link">
+                            <a href="{{ route('Films.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Films</p>
                             </a>
@@ -83,7 +83,7 @@
 
                         <!-- Film Actors -->
                         <li class="nav-item">
-                            <a href="{{ route('Flim_Actor') }}" class="nav-link">
+                            <a href="{{ route('FilmsActors.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Flim Actors</p>
                             </a>
@@ -91,7 +91,7 @@
 
                         <!-- Film Categories -->
                         <li class="nav-item">
-                            <a href="{{ route('Flim_Category') }}" class="nav-link">
+                            <a href="{{ route('FilmsCategories.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Flimm Categories</p>
                             </a>
@@ -99,7 +99,7 @@
 
                         <!-- Film Text -->
                         <li class="nav-item">
-                            <a href="{{ route('Film_text') }}" class="nav-link">
+                            <a href="{{ route('FilmsTexts.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Film Text</p>
                             </a>
@@ -107,7 +107,7 @@
 
                         <!-- Inventory -->
                         <li class="nav-item">
-                            <a href="{{ route('Inventories') }}" class="nav-link">
+                            <a href="{{ route('Inventories.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Inventories</p>
                             </a>
@@ -115,7 +115,7 @@
 
                         <!-- Languages -->
                         <li class="nav-item">
-                            <a href="{{ route('Languages') }}" class="nav-link">
+                            <a href="{{ route('Languages.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Languages</p>
                             </a>
@@ -123,7 +123,7 @@
 
                         <!-- Payments -->
                         <li class="nav-item">
-                            <a href="{{ route('Payments') }}" class="nav-link">
+                            <a href="{{ route('Payments.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Payments</p>
                             </a>
@@ -131,7 +131,7 @@
 
                         <!-- Rentals -->
                         <li class="nav-item">
-                            <a href="{{ route('Rentals') }}" class="nav-link">
+                            <a href="{{ route('Rentals.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Rentals</p>
                             </a>
@@ -139,7 +139,7 @@
 
                         <!-- Staff -->
                         <li class="nav-item">
-                            <a href="{{ route('Staff') }}" class="nav-link">
+                            <a href="{{ route('Staff.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Staff</p>
                             </a>
@@ -147,7 +147,7 @@
 
                         <!-- Stores -->
                         <li class="nav-item">
-                            <a href="{{ route('Stores') }}" class="nav-link">
+                            <a href="{{ route('Stores.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-circle text-danger"></i>
                                 <p>Stores</p>
                             </a>
