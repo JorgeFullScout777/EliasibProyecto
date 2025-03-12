@@ -49,11 +49,11 @@
                             </a>
                         </li>
 
-                        <!-- Citys -->
+                        <!-- cities -->
                         <li class="nav-item">
                             <a href="{{ route('Citys') }}" class="nav-link">
                                 <i class="nav-icon fas fa-city" style="color: #ff0000;"></i>
-                                <p>Citys</p>
+                                <p>Cities</p>
                             </a>
                         </li>
 
