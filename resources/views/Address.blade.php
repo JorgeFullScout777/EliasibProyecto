@@ -89,13 +89,13 @@
                                                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#addressModalUpdate" data-id="{{ $address->address_id }}" data-address="{{ $address->address }}" data-address2="{{ $address->address2 }}" data-district="{{ $address->district }}" data-city_id="{{ $address->city_id }}" data-postal_code="{{ $address->postal_code }}" data-phone="{{ $address->phone }}">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </button>
-                                                            <form action="{{ route('address.destroy', $address->address_id) }}" method="POST" style="display:inline;">
+                                                            <!--<form action="{{ route('address.destroy', $address->address_id) }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                                     <i class="fas fa-trash"></i> Delete
                                                                 </button>
-                                                            </form>
+                                                            </form>-->
                                                         </td>
                                                     </tr>
                                                     @endforeach

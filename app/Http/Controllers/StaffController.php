@@ -8,6 +8,8 @@ use App\Models\Staff;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class StaffController extends Controller
 {
@@ -97,15 +99,27 @@ class StaffController extends Controller
 
 
     /**
-     * Delete a staff member by its ID.
-     *
-     * @param int $id : The staff ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id) {
-        // Search the staff member by its ID
-        $staff = Staff::findOrFail($id); 
-        $staff->delete();
-        return redirect()->route('Staff');
-    }
+ * Delete a staff member by its ID.
+ *
+ * @param int $id : The staff ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id)
+{
+    // Buscar el miembro del staff por su ID
+    $staff = Staff::findOrFail($id);
+
+    // Eliminar pagos relacionados
+    DB::table('payment')->where('staff_id', $id)->delete();
+
+    // Eliminar alquileres relacionados (opcional, si es necesario)
+    DB::table('rental')->where('staff_id', $id)->delete();
+
+    // Eliminar el miembro del staff
+    $staff->delete();
+
+    // Redirigir a la lista de staff
+    return redirect()->route('Staff');
+}
+
 }

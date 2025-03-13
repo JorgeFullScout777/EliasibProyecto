@@ -8,6 +8,8 @@ use App\Models\Rental;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class RentalsController extends Controller
 {
@@ -93,15 +95,29 @@ class RentalsController extends Controller
     }
 
     /**
-     * Delete a rental by its ID.
-     *
-     * @param int $id : The rental ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id) {
-        // Search the rental by its ID
-        $rental = Rental::where('rental_id', $id)->first();
-        $rental->delete();
-        return redirect()->route('Rentals');
+ * Delete a rental by its ID.
+ *
+ * @param int $id : The rental ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id)
+{
+    // Buscar el alquiler por su ID
+    $rental = Rental::where('rental_id', $id)->first();
+
+    // Verificar si el alquiler existe
+    if (!$rental) {
+        return response()->json(['message' => 'Rental not found.'], 404);
     }
+
+    // Eliminar pagos relacionados con el alquiler
+    DB::table('payment')->where('rental_id', $id)->delete();
+
+    // Eliminar el alquiler después de limpiar las relaciones
+    $rental->delete();
+
+    // Redirigir a la lista de alquileres
+    return redirect()->route('Rentals');
+}
+
 }

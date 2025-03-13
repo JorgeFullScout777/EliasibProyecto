@@ -8,6 +8,8 @@ use App\Models\Actor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 
 class ActorsController extends Controller
 {
@@ -97,24 +99,30 @@ class ActorsController extends Controller
      
     
     /**
-     * Delete an actor by its ID.
-     *
-     * @param int $id : The actor ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id)
-    {
-        $actor = Actor::where('actor_id', $id)->first();
-    
-        // Si el actor no existe, devuelve un error
-        if (!$actor) {
-            return response()->json(['message' => 'Actor not found.'], 404);
-        }
-    
-        // Eliminar al actor
-        $actor->delete();
-    
-        return redirect()->route('Actors'); 
+ * Delete an actor by its ID.
+ *
+ * @param int $id : The actor ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id)
+{
+    // Buscar el actor por su ID
+    $actor = Actor::where('actor_id', $id)->first();
+
+    // Si el actor no existe, devuelve un error
+    if (!$actor) {
+        return response()->json(['message' => 'Actor not found.'], 404);
     }
+
+    // Eliminar las relaciones en la tabla film_actor
+    DB::table('film_actor')->where('actor_id', $id)->delete();
+
+    // Eliminar al actor después de limpiar las relaciones
+    $actor->delete();
+
+    // Redirigir a la lista de actores
+    return redirect()->route('Actors');
+}
+
     
 }

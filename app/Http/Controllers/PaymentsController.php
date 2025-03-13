@@ -8,6 +8,8 @@ use App\Models\Payment;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class PaymentsController extends Controller
 {
@@ -88,15 +90,25 @@ class PaymentsController extends Controller
     }
 
     /**
-     * Delete a payment by its ID.
-     *
-     * @param int $id : The payment ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id) {
-        // Search the payment by its ID
-        $payment = Payment::where('payment_id', $id)->first();
-        $payment->delete();
-        return redirect()->route('Payments');
+ * Delete a payment by its ID.
+ *
+ * @param int $id : The payment ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id) {
+    // Buscar el pago por su ID
+    $payment = Payment::where('payment_id', $id)->first();
+
+    // Verificar si el pago existe
+    if (!$payment) {
+        return response()->json(['message' => 'Payment not found.'], 404);
     }
+
+    // Eliminar el pago
+    $payment->delete();
+
+    // Redirigir a la lista de pagos
+    return redirect()->route('Payments');
+}
+
 }

@@ -9,6 +9,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\City;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 
 class AddressesController extends Controller
 {
@@ -120,17 +122,26 @@ class AddressesController extends Controller
 
 
     /**
-     * Delete an address by its ID.
-     *
-     * @param int $id : The address ID.
-     * @return JsonResponse
-     */
-    public function destroy($id)
-    {
-        $address = Address::findOrFail($id);
-        $address->delete();
-    
-        return redirect()->route('Address');
-    }
+ * Delete an address by its ID.
+ *
+ * @param int $id : The address ID.
+ * @return JsonResponse
+ */
+public function destroy($id)
+{
+    // Buscar la dirección por su ID
+    $address = Address::findOrFail($id);
+
+    // Eliminar las relaciones de tiendas asociadas a esta dirección
+    DB::table('store')->where('address_id', $id)->update(['address_id' => null]);
+
+    // Eliminar la dirección
+    $address->delete();
+
+    // Redirigir a la lista de direcciones
+    return redirect()->route('Address');
+}
+
+
 
 }

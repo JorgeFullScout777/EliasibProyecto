@@ -75,13 +75,13 @@
                                                     <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateCustomerModal" data-id="{{ $customer->customer_id }}" data-first_name="{{ $customer->first_name }}" data-last_name="{{ $customer->last_name }}" data-email="{{ $customer->email }}" data-active="{{ $customer->active }}">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </button>
-                                                    <form action="{{ route('customers.destroy', $customer->customer_id) }}" method="POST" style="display: inline;">
+                                                    <!--<form action="{{ route('customers.destroy', $customer->customer_id) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm" type="submit">
                                                             <i class="fas fa-trash"></i> Delete
                                                         </button>
-                                                    </form>
+                                                    </form>-->
                                                 </td>
                                             </tr>
                                             @endforeach

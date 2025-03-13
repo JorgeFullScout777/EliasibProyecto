@@ -7,6 +7,8 @@ use App\Http\Requests\FilmTextPutRequest;
 use App\Models\FilmText;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class FilmsTextsController extends Controller
 {
@@ -107,18 +109,28 @@ class FilmsTextsController extends Controller
      * @param int $film_id : The film ID.
      * @return JsonResponse
      */
-    public function destroy(int $film_id): JsonResponse {
-        // Search the film text by film_id
-        $filmText = FilmText::where('film_id', $film_id)->first();
+    public function destroy(int $film_id): JsonResponse
+{
+    // Buscar el film_text por film_id
+    $filmText = FilmText::where('film_id', $film_id)->first();
 
-        // If the film text does not exist, return an error
-        if (!$filmText) {
-            return response()->json(['message' => 'Film text not found.'], 404);
-        }
-
-        // Delete the film text
-        $filmText->delete();
-
-        return response()->json(['message' => 'Film text deleted.']);
+    if (!$filmText) {
+        return response()->json(['message' => 'Film text not found.'], 404);
     }
+
+    // Eliminar registros relacionados en film_actor
+    DB::table('film_actor')->where('film_id', $film_id)->delete();
+    
+    // Eliminar el film_text
+    $filmText->delete();
+    
+    // Eliminar el film después de limpiar las referencias
+    $film = Film::where('film_id', $film_id)->first();
+    if ($film) {
+        $film->delete();
+    }
+
+    return response()->json(['message' => 'Film and related data deleted.']);
+}
+
 }

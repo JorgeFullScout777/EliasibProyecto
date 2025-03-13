@@ -7,6 +7,8 @@ use App\Http\Requests\InventoryPutRequest;
 use App\Models\Inventory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class InventoriesController extends Controller
 {
@@ -94,15 +96,19 @@ class InventoriesController extends Controller
      * @return JsonResponse
      */
     public function destroy($id)
-    {
-        // Encuentra el inventario por su ID
-        $inventory = Inventory::findOrFail($id);
+{
+    // Encuentra el inventario por su ID
+    $inventory = Inventory::findOrFail($id);
 
-        // Elimina el inventario
-        $inventory->delete();
+    // Elimina registros relacionados en rental
+    DB::table('rental')->where('inventory_id', $id)->delete();
 
-        // Redirige al listado de inventarios
-        return redirect()->route('Inventories');
-    }
+    // Elimina el inventario
+    $inventory->delete();
+
+    // Redirige al listado de inventarios
+    return redirect()->route('Inventories');
+}
+
 
 }

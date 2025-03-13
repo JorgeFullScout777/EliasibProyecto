@@ -7,6 +7,8 @@ use App\Http\Requests\StorePutRequest;
 use App\Models\Store;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class StoresController extends Controller
 {
@@ -90,23 +92,33 @@ class StoresController extends Controller
     }
 
     /**
-     * Delete a store by its ID.
-     *
-     * @param int $id : The store ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id): JsonResponse {
-        // Search the store by its ID
-        $store = Store::where('store_id', $id)->first();
+ * Delete a store by its ID.
+ *
+ * @param int $id : The store ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id): JsonResponse
+{
+    // Buscar la tienda por su ID
+    $store = Store::where('store_id', $id)->first();
 
-        // If the store does not exist, return an error
-        if (!$store) {
-            return response()->json(['message' => 'Store not found.'], 404);
-        }
-
-        // Delete the store
-        $store->delete();
-
-        return response()->json(['message' => 'Store deleted.']);
+    // Verificar si la tienda existe
+    if (!$store) {
+        return response()->json(['message' => 'Store not found.'], 404);
     }
+
+    // Eliminar clientes asociados a esta tienda
+    DB::table('customer')->where('store_id', $id)->delete();
+
+    // Eliminar inventarios asociados a esta tienda
+    DB::table('inventory')->where('store_id', $id)->delete();
+
+    // Eliminar empleados asociados a esta tienda (excepto el gerente, si es necesario mantenerlo)
+    DB::table('staff')->where('store_id', $id)->delete();
+
+    // Eliminar la tienda
+    $store->delete();
+
+    return response()->json(['message' => 'Store deleted.']);
+}
 }

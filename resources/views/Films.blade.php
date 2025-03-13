@@ -96,13 +96,13 @@
                                                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateFilmModal" data-id="{{ $film->film_id }}" data-title="{{ $film->title }}" data-description="{{ $film->description }}" data-release_year="{{ $film->release_year }}" data-language_id="{{ $film->language_id }}" data-original_language_id="{{ $film->original_language_id }}" data-rental_duration="{{ $film->rental_duration }}" data-rental_rate="{{ $film->rental_rate }}" data-length="{{ $film->length }}" data-replacement_cost="{{ $film->replacement_cost }}" data-rating="{{ $film->rating }}" data-special_features="{{ $film->special_features }}">
                                                                     <i class="fas fa-edit"></i> Edit
                                                                 </button>
-                                                                <form action="{{ route('films.destroy', $film->film_id) }}" method="POST" style="display: inline;">
+                                                                <!--<form action="{{ route('films.destroy', $film->film_id) }}" method="POST" style="display: inline;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button class="btn btn-danger btn-sm" type="submit">
                                                                         <i class="fas fa-trash"></i> Delete
                                                                     </button>
-                                                                </form>
+                                                                </form>-->
                                                             </td>
                                                         </tr>
                                                         @endforeach

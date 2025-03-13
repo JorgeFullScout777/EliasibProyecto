@@ -12,6 +12,8 @@ use App\Models\FilmCategory;
 use App\Models\FilmText;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class FilmsController extends Controller
 {
@@ -157,10 +159,20 @@ class FilmsController extends Controller
      * @param int $id : The film ID.
      * @return JsonResponse
      */
-    public function destroy(int $id) {
-        // Search the film by its ID
+    public function destroy(int $id)
+    {
+        // Buscar la película por su ID
         $film = Film::where('film_id', $id)->first();
-        $film->delete();
+        
+        if ($film) {
+            // Eliminar registros relacionados en film_actor
+            DB::table('film_actor')->where('film_id', $id)->delete();
+            
+            // Eliminar la película después de limpiar las referencias
+            $film->delete();
+        }
+    
         return redirect()->route('Films');
     }
+    
 }

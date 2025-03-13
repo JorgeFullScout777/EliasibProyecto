@@ -7,6 +7,7 @@ use App\Http\Requests\CustomerPutRequest;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller
 {
@@ -93,15 +94,31 @@ class CustomersController extends Controller
     }
 
     /**
-     * Delete a customer by its ID.
-     *
-     * @param int $id : The customer ID.
-     * @return JsonResponse
-     */
-    public function destroy(int $id){
-        // Search the customer by its ID
-        $customer = Customer::where('customer_id', $id)->first();
-        $customer->delete();
-        return redirect()->route('Customers');
+ * Delete a customer by its ID.
+ *
+ * @param int $id : The customer ID.
+ * @return JsonResponse
+ */
+public function destroy(int $id)
+{
+    // Buscar el cliente por su ID
+    $customer = Customer::where('customer_id', $id)->first();
+
+    // Si el cliente no existe, devolver un mensaje de error
+    if (!$customer) {
+        return response()->json(['message' => 'Customer not found.'], 404);
     }
+
+    // Eliminar las relaciones asociadas al cliente, como pagos, alquileres, etc.
+    DB::table('payment')->where('customer_id', $id)->delete(); // Eliminar pagos asociados
+    DB::table('rental')->where('customer_id', $id)->delete(); // Eliminar alquileres asociados
+    DB::table('address')->where('address_id', $customer->address_id)->update(['address_id' => null]); // Desvincular dirección si es necesario
+
+    // Eliminar el cliente
+    $customer->delete();
+
+    // Redirigir a la lista de clientes
+    return redirect()->route('Customers');
+}
+
 }

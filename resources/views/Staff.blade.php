@@ -85,13 +85,13 @@
                                                             <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editStaffModal" data-staff_id="{{ $member->staff_id }}" data-first_name="{{ $member->first_name }}" data-last_name="{{ $member->last_name }}" data-address_id="{{ $member->address_id }}" data-picture="{{ $member->picture }}" data-email="{{ $member->email }}" data-store_id="{{ $member->store_id }}" data-active="{{ $member->active }}" data-username="{{ $member->username }}">
                                                                 <i class="fas fa-edit"></i> Edit
                                                             </a>
-                                                            <form action="{{ route('staff.destroy', $member->staff_id) }}" method="POST" style="display: inline-block;">
+                                                            <!--<form action="{{ route('staff.destroy', $member->staff_id) }}" method="POST" style="display: inline-block;">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                                     <i class="fas fa-trash"></i> Delete
                                                                 </button>
-                                                            </form>
+                                                            </form>-->
                                                         </td>
                                                     </tr>
                                                     @endforeach
